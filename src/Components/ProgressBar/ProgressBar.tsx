@@ -1,29 +1,30 @@
 import { useEffect, useState } from 'react'
 
-import { LinearProgress, Typography } from '@mui/material'
+import { LinearProgress, Typography, Box } from '@mui/material'
 
 type ProgressBarProps = {
-    brake: boolean
+    isWorking: boolean
 }
 
-export const ProgressBar = function ProgressBar({
-    brake,
-}: ProgressBarProps): JSX.Element {
-    const [brakeState, setBrakeState] = useState(false)
-    const progress = 100
+export function ProgressBar({ isWorking }: ProgressBarProps): JSX.Element {
+    const [isWorkingState, setIsWorking] = useState(false)
+    const progress = 59
     useEffect(() => {
-        setBrakeState(brake)
-    }, [brake])
+        setIsWorking(isWorking)
+    }, [isWorking])
     return (
         <>
             <Typography variant="h1">
-                {brakeState ? 'Work!' : 'Brake'}
+                {isWorkingState ? 'Work!' : 'Brake'}
             </Typography>
-            <LinearProgress
-                variant="determinate"
-                value={progress}
-                color={brakeState ? 'primary' : 'inherit'}
-            />
+            <Box>
+                <LinearProgress
+                    variant="determinate"
+                    value={progress}
+                    color={isWorkingState ? 'primary' : 'inherit'}
+                />
+                <Typography variant="h4">essa</Typography>
+            </Box>
         </>
     )
 }

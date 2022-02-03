@@ -1,7 +1,6 @@
-import './App.css'
-
 import { Container } from '@mui/material'
 import { ProgressBar } from './Components/ProgressBar/ProgressBar'
+import { Form } from './Components/Form/Form'
 
 // pomodoro app that alerts user about intervals set to enhance productivity
 
@@ -12,13 +11,12 @@ import { ProgressBar } from './Components/ProgressBar/ProgressBar'
 // counter of past intervals
 
 function App() {
-    const brake = true
+    const isWorking = true
     return (
-        <div className="App">
-            <Container maxWidth="sm">
-                <ProgressBar brake={brake} />
-            </Container>
-        </div>
+        <Container maxWidth="sm">
+            <ProgressBar isWorking={isWorking} />
+            <Form />
+        </Container>
     )
 }
 

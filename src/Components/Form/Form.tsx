@@ -1,19 +1,23 @@
 import { Container } from '@mui/material'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Dispatch } from 'redux'
 import { NumberInputTextField } from '../NumberInputTextField/NumberInputTextField'
 import { ActionButton } from '../ActionButton/ActionButton'
+import { setTimes } from '../../Store/actionCreators'
 
 export function Form(): JSX.Element {
     const [focusTime, setFocusTime] = useState<number>(25)
     const [breakTime, setBreakTime] = useState<number>(5)
     const [longerBreakTime, setLongerBreakTime] = useState<number>(15)
+    const dispatch: Dispatch<any> = useDispatch()
     function onStartClick() {
         const times = {
             focusTime,
             breakTime,
             longerBreakTime,
         }
-        console.log(times)
+        dispatch(setTimes(times))
     }
     return (
         <>

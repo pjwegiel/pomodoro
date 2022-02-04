@@ -15,7 +15,7 @@ export function ProgressBar({ isWorking }: ProgressBarProps): JSX.Element {
     return (
         <>
             <Typography variant="h1">
-                {isWorkingState ? 'Work!' : 'Break'}
+                {isWorkingState ? 'Focus!' : 'Break'}
             </Typography>
             <Box>
                 <LinearProgress

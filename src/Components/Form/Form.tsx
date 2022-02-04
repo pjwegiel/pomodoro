@@ -1,11 +1,20 @@
-import { Container, Button } from '@mui/material'
+import { Container } from '@mui/material'
 import { useState } from 'react'
 import { NumberInputTextField } from '../NumberInputTextField/NumberInputTextField'
+import { ActionButton } from '../ActionButton/ActionButton'
 
 export function Form(): JSX.Element {
     const [focusTime, setFocusTime] = useState<number>(25)
-    const [brakeTime, setBrakeTime] = useState<number>(5)
-    const [longerBrakeTime, setLongerBrakeTime] = useState<number>(15)
+    const [breakTime, setBreakTime] = useState<number>(5)
+    const [longerBreakTime, setLongerBreakTime] = useState<number>(15)
+    function onStartClick() {
+        const times = {
+            focusTime,
+            breakTime,
+            longerBreakTime,
+        }
+        console.log(times)
+    }
     return (
         <>
             <br />
@@ -20,28 +29,26 @@ export function Form(): JSX.Element {
                     }}
                 />
                 <NumberInputTextField
-                    label="Brake time"
-                    value={brakeTime}
+                    label="Break time"
+                    value={breakTime}
                     onChangeEvent={(e) => {
                         e.preventDefault()
-                        const brakeValue = parseInt(e.target.value, 10)
-                        setBrakeTime(brakeValue)
+                        const breakValue = parseInt(e.target.value, 10)
+                        setBreakTime(breakValue)
                     }}
                 />
                 <NumberInputTextField
-                    label="Longer brake time"
-                    value={longerBrakeTime}
+                    label="Longer break time"
+                    value={longerBreakTime}
                     onChangeEvent={(e) => {
                         e.preventDefault()
-                        const longerBrakeValue = parseInt(e.target.value, 10)
-                        setLongerBrakeTime(longerBrakeValue)
+                        const longerBreakValue = parseInt(e.target.value, 10)
+                        setLongerBreakTime(longerBreakValue)
                     }}
                 />
             </Container>
             <br />
-            <Button variant="contained" fullWidth>
-                Start
-            </Button>
+            <ActionButton label="Start" onClickEvent={() => onStartClick()} />
         </>
     )
 }

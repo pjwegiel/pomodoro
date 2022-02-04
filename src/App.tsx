@@ -1,4 +1,5 @@
 import { Container } from '@mui/material'
+import { useState } from 'react'
 import { ProgressBar } from './Components/ProgressBar/ProgressBar'
 import { Form } from './Components/Form/Form'
 
@@ -11,7 +12,18 @@ import { Form } from './Components/Form/Form'
 // counter of past intervals
 
 function App() {
-    const isWorking = true
+    type timesStateType = {
+        focusTime: number
+        breakTime: number
+        longerBreakTime: number
+    }
+    const [timesState, setTimesState] = useState<timesStateType>({
+        focusTime: 15,
+        breakTime: 5,
+        longerBreakTime: 15,
+    })
+
+    const isWorking = false
     return (
         <Container maxWidth="sm">
             <ProgressBar isWorking={isWorking} />

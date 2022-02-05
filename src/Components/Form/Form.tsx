@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { NumberInputTextField } from '../NumberInputTextField/NumberInputTextField'
 
 export function Form(): JSX.Element {
-    const [focusTime, setFocusTime] = useState<number>(25)
-    const [brakeTime, setBrakeTime] = useState<number>(5)
-    const [longerBrakeTime, setLongerBrakeTime] = useState<number>(15)
+    const [focusTime, setFocusTime] = useState(25)
+    const [brakeTime, setBrakeTime] = useState(5)
+    const [longerBrakeTime, setLongerBrakeTime] = useState(15)
     return (
         <>
             <br />

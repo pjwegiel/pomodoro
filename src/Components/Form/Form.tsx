@@ -1,14 +1,22 @@
+import { makeStyles } from '@mui/styles'
 import { Container, Button } from '@mui/material'
 import { useState } from 'react'
 import { NumberInputTextField } from '../NumberInputTextField/NumberInputTextField'
+
+const useStyles = makeStyles({
+    container: {
+        display: 'flex',
+    },
+})
 
 export function Form(): JSX.Element {
     const [focusTime, setFocusTime] = useState(25)
     const [brakeTime, setBrakeTime] = useState(5)
     const [longerBrakeTime, setLongerBrakeTime] = useState(15)
+    const classes = useStyles()
     return (
         <>
-            <Container style={{ display: 'flex' }}>
+            <Container className={classes.container}>
                 <NumberInputTextField
                     label="Focus time"
                     value={focusTime}

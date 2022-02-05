@@ -1,7 +1,6 @@
 import { makeStyles } from '@mui/styles'
-import { Container, Button } from '@mui/material'
+import { Container, Button, TextField } from '@mui/material'
 import { useState } from 'react'
-import { NumberInputTextField } from '../NumberInputTextField/NumberInputTextField'
 
 const useStyles = makeStyles({
     container: {
@@ -11,37 +10,43 @@ const useStyles = makeStyles({
 
 export function Form(): JSX.Element {
     const [focusTime, setFocusTime] = useState(25)
-    const [brakeTime, setBrakeTime] = useState(5)
-    const [longerBrakeTime, setLongerBrakeTime] = useState(15)
+    const [breakTime, setBreakTime] = useState(5)
+    const [longerBreakTime, setLongerBreakTime] = useState(15)
     const classes = useStyles()
     return (
         <>
             <Container className={classes.container}>
-                <NumberInputTextField
+                <TextField
+                    type="number"
+                    inputProps={{ min: 0 }}
                     label="Focus time"
                     value={focusTime}
-                    onChangeEvent={(e) => {
+                    onChange={(e) => {
                         e.preventDefault()
                         const focusValue = parseInt(e.target.value, 10)
                         setFocusTime(focusValue)
                     }}
                 />
-                <NumberInputTextField
-                    label="Brake time"
-                    value={brakeTime}
-                    onChangeEvent={(e) => {
+                <TextField
+                    type="number"
+                    inputProps={{ min: 0 }}
+                    label="Break time"
+                    value={breakTime}
+                    onChange={(e) => {
                         e.preventDefault()
-                        const brakeValue = parseInt(e.target.value, 10)
-                        setBrakeTime(brakeValue)
+                        const focusValue = parseInt(e.target.value, 10)
+                        setBreakTime(focusValue)
                     }}
                 />
-                <NumberInputTextField
-                    label="Longer brake time"
-                    value={longerBrakeTime}
-                    onChangeEvent={(e) => {
+                <TextField
+                    type="number"
+                    inputProps={{ min: 0 }}
+                    label="Longer break time"
+                    value={longerBreakTime}
+                    onChange={(e) => {
                         e.preventDefault()
-                        const longerBrakeValue = parseInt(e.target.value, 10)
-                        setLongerBrakeTime(longerBrakeValue)
+                        const focusValue = parseInt(e.target.value, 10)
+                        setLongerBreakTime(focusValue)
                     }}
                 />
             </Container>

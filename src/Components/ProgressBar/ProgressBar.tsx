@@ -8,18 +8,37 @@ type ProgressBarProps = {
 }
 
 export function ProgressBar({ isWorking }: ProgressBarProps): JSX.Element {
-    const [isWorkingState, setIsWorking] = useState(false)
+    const [isWorkingState, setIsWorkingState] = useState(true)
     const timesState = useSelector((state: TimesState) => state.times)
     const [progress, setProgress] = useState<number>(0)
     useEffect(() => {
-        setIsWorking(isWorking)
+        // setIsWorkingState(isWorking)
         const interval = setInterval(() => {
-            setProgress(
-                Number((progress + 1 / timesState.focusTime).toFixed(2)) <= 100
-                    ? Number((progress + 1 / timesState.focusTime).toFixed(2))
-                    : 0
-            )
-            console.log(progress)
+            if (isWorkingState) {
+                const currentInterval = timesState.focusTime
+                const currentProgress = Number(
+                    (progress + 1 / currentInterval).toFixed(2)
+                )
+                if (currentProgress < 100) {
+                    setProgress(currentProgress)
+                } else {
+                    setIsWorkingState(false)
+                    setProgress(0)
+                }
+                console.log(currentProgress)
+            } else {
+                const currentInterval = timesState.breakTime
+                const currentProgress = Number(
+                    (progress + 1 / currentInterval).toFixed(2)
+                )
+                if (currentProgress < 100) {
+                    setProgress(currentProgress)
+                } else {
+                    setIsWorkingState(true)
+                    setProgress(0)
+                }
+                console.log(currentProgress)
+            }
         }, 1000)
         return () => clearInterval(interval)
     }, [isWorking, timesState, progress])

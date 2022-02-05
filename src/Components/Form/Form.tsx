@@ -8,7 +8,6 @@ export function Form(): JSX.Element {
     const [longerBrakeTime, setLongerBrakeTime] = useState(15)
     return (
         <>
-            <br />
             <Container style={{ display: 'flex' }}>
                 <NumberInputTextField
                     label="Focus time"
@@ -38,7 +37,6 @@ export function Form(): JSX.Element {
                     }}
                 />
             </Container>
-            <br />
             <Button variant="contained" fullWidth>
                 Start
             </Button>

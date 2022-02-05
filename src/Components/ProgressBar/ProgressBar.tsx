@@ -2,16 +2,12 @@ import { useEffect, useState } from 'react'
 
 import { LinearProgress, Typography, Box } from '@mui/material'
 
-type ProgressBarProps = {
-    isWorking: boolean
-}
-
-export function ProgressBar({ isWorking }: ProgressBarProps): JSX.Element {
-    const [isWorkingState, setIsWorking] = useState(false)
+export function ProgressBar(): JSX.Element {
+    const [isWorkingState, setIsWorking] = useState(true)
     const progress = 59
     useEffect(() => {
-        setIsWorking(isWorking)
-    }, [isWorking])
+        console.log('essa')
+    }, [isWorkingState])
     return (
         <>
             <Typography variant="h1">

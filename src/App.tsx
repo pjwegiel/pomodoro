@@ -11,10 +11,9 @@ import { Form } from './Components/Form/Form'
 // counter of past intervals
 
 function App() {
-    const isWorking = true
     return (
         <Container maxWidth="sm">
-            <ProgressBar isWorking={isWorking} />
+            <ProgressBar />
             <Form />
         </Container>
     )

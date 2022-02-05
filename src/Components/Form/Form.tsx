@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles'
 import { Container, Button, TextField } from '@mui/material'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 const useStyles = makeStyles({
     container: {
@@ -13,6 +13,13 @@ export function Form(): JSX.Element {
     const [breakTime, setBreakTime] = useState(5)
     const [longerBreakTime, setLongerBreakTime] = useState(15)
     const classes = useStyles()
+    const handleChange =
+        (cb: (number: number) => void) =>
+        (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+            event.preventDefault()
+            const value = parseInt(event.target.value, 10)
+            cb(value)
+        }
     return (
         <>
             <Container className={classes.container}>
@@ -21,33 +28,21 @@ export function Form(): JSX.Element {
                     inputProps={{ min: 0 }}
                     label="Focus time"
                     value={focusTime}
-                    onChange={(e) => {
-                        e.preventDefault()
-                        const focusValue = parseInt(e.target.value, 10)
-                        setFocusTime(focusValue)
-                    }}
+                    onChange={handleChange(setFocusTime)}
                 />
                 <TextField
                     type="number"
                     inputProps={{ min: 0 }}
                     label="Break time"
                     value={breakTime}
-                    onChange={(e) => {
-                        e.preventDefault()
-                        const focusValue = parseInt(e.target.value, 10)
-                        setBreakTime(focusValue)
-                    }}
+                    onChange={handleChange(setBreakTime)}
                 />
                 <TextField
                     type="number"
                     inputProps={{ min: 0 }}
                     label="Longer break time"
                     value={longerBreakTime}
-                    onChange={(e) => {
-                        e.preventDefault()
-                        const focusValue = parseInt(e.target.value, 10)
-                        setLongerBreakTime(focusValue)
-                    }}
+                    onChange={handleChange(setLongerBreakTime)}
                 />
             </Container>
             <Button variant="contained" fullWidth>

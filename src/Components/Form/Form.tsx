@@ -3,7 +3,7 @@ import { Container, Button, TextField } from '@mui/material'
 import { ChangeEvent, useState } from 'react'
 
 const useStyles = makeStyles({
-    container: {
+    textFieldsContainer: {
         display: 'flex',
     },
 })
@@ -22,7 +22,7 @@ export function Form(): JSX.Element {
         }
     return (
         <>
-            <Container className={classes.container}>
+            <Container className={classes.textFieldsContainer}>
                 <TextField
                     type="number"
                     inputProps={{ min: 0 }}

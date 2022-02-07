@@ -1,7 +1,7 @@
-import './App.css'
-
 import { Container } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 import { ProgressBar } from './Components/ProgressBar/ProgressBar'
+import { Form } from './Components/Form/Form'
 
 // pomodoro app that alerts user about intervals set to enhance productivity
 
@@ -11,14 +11,22 @@ import { ProgressBar } from './Components/ProgressBar/ProgressBar'
 
 // counter of past intervals
 
+const useStyles = makeStyles({
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        gap: '3vh',
+    },
+})
+
 function App() {
-    const brake = true
+    const classes = useStyles()
     return (
-        <div className="App">
-            <Container maxWidth="sm">
-                <ProgressBar brake={brake} />
-            </Container>
-        </div>
+        <Container className={classes.container} maxWidth="sm">
+            <ProgressBar />
+            <Form />
+        </Container>
     )
 }
 

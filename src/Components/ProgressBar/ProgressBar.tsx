@@ -3,11 +3,7 @@ import { useEffect, useState } from 'react'
 import { LinearProgress, Typography, Box } from '@mui/material'
 import { useSelector } from 'react-redux'
 
-type ProgressBarProps = {
-    isWorking: boolean
-}
-
-export function ProgressBar({ isWorking }: ProgressBarProps): JSX.Element {
+export function ProgressBar(): JSX.Element {
     const [isWorkingState, setIsWorkingState] = useState(true)
     const timesState = useSelector((state: TimesState) => state.times)
     const [progress, setProgress] = useState<number>(0)
@@ -41,7 +37,7 @@ export function ProgressBar({ isWorking }: ProgressBarProps): JSX.Element {
             }
         }, 1000)
         return () => clearInterval(interval)
-    }, [isWorking, timesState, progress])
+    }, [isWorkingState, timesState, progress])
     return (
         <>
             <Typography variant="h1">

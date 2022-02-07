@@ -1,4 +1,5 @@
 import { Container } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 import { ProgressBar } from './Components/ProgressBar/ProgressBar'
 import { Form } from './Components/Form/Form'
 
@@ -10,11 +11,20 @@ import { Form } from './Components/Form/Form'
 
 // counter of past intervals
 
+const useStyles = makeStyles({
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        gap: '3vh',
+    },
+})
+
 function App() {
-    const isWorking = true
+    const classes = useStyles()
     return (
-        <Container maxWidth="sm">
-            <ProgressBar isWorking={isWorking} />
+        <Container className={classes.container} maxWidth="sm">
+            <ProgressBar />
             <Form />
         </Container>
     )

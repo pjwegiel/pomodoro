@@ -1,58 +1,53 @@
-import { Container } from '@mui/material'
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { Dispatch } from 'redux'
-import { NumberInputTextField } from '../NumberInputTextField/NumberInputTextField'
-import { ActionButton } from '../ActionButton/ActionButton'
-import { setTimes } from '../../Store/actionCreators'
+import { makeStyles } from '@mui/styles'
+import { Container, Button, TextField } from '@mui/material'
+import { ChangeEvent, useState } from 'react'
+
+const useStyles = makeStyles({
+    textFieldsContainer: {
+        display: 'flex',
+    },
+})
 
 export function Form(): JSX.Element {
-    const [focusTime, setFocusTime] = useState<number>(25)
-    const [breakTime, setBreakTime] = useState<number>(5)
-    const [longerBreakTime, setLongerBreakTime] = useState<number>(15)
-    const dispatch: Dispatch<any> = useDispatch()
-    function onStartClick() {
-        const times = {
-            focusTime,
-            breakTime,
-            longerBreakTime,
+    const [focusTime, setFocusTime] = useState(25)
+    const [breakTime, setBreakTime] = useState(5)
+    const [longerBreakTime, setLongerBreakTime] = useState(15)
+    const classes = useStyles()
+    const handleChange =
+        (cb: (number: number) => void) =>
+        (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+            event.preventDefault()
+            const value = parseInt(event.target.value, 10)
+            cb(value)
         }
-        dispatch(setTimes(times))
-    }
     return (
         <>
-            <br />
-            <Container style={{ display: 'flex' }}>
-                <NumberInputTextField
+            <Container className={classes.textFieldsContainer}>
+                <TextField
+                    type="number"
+                    inputProps={{ min: 0 }}
                     label="Focus time"
                     value={focusTime}
-                    onChangeEvent={(e) => {
-                        e.preventDefault()
-                        const focusValue = parseInt(e.target.value, 10)
-                        setFocusTime(focusValue)
-                    }}
+                    onChange={handleChange(setFocusTime)}
                 />
-                <NumberInputTextField
+                <TextField
+                    type="number"
+                    inputProps={{ min: 0 }}
                     label="Break time"
                     value={breakTime}
-                    onChangeEvent={(e) => {
-                        e.preventDefault()
-                        const breakValue = parseInt(e.target.value, 10)
-                        setBreakTime(breakValue)
-                    }}
+                    onChange={handleChange(setBreakTime)}
                 />
-                <NumberInputTextField
+                <TextField
+                    type="number"
+                    inputProps={{ min: 0 }}
                     label="Longer break time"
                     value={longerBreakTime}
-                    onChangeEvent={(e) => {
-                        e.preventDefault()
-                        const longerBreakValue = parseInt(e.target.value, 10)
-                        setLongerBreakTime(longerBreakValue)
-                    }}
+                    onChange={handleChange(setLongerBreakTime)}
                 />
             </Container>
-            <br />
-            <ActionButton label="Start" onClickEvent={() => onStartClick()} />
+            <Button variant="contained" fullWidth>
+                Start
+            </Button>
         </>
     )
 }

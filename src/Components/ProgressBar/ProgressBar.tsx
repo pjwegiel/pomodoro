@@ -5,31 +5,33 @@ import { useSelector } from 'react-redux'
 
 export function ProgressBar(): JSX.Element {
     const [isWorkingState, setIsWorkingState] = useState(true)
-    const timesState = useSelector((state: TimesState) => state.times)
+    const [seconds, setSeconds] = useState(1)
+    const timesState = useSelector((state: AppState) => state.times)
     const [progress, setProgress] = useState<number>(0)
     useEffect(() => {
         const interval = setInterval(() => {
             if (isWorkingState) {
-                const currentInterval = timesState.focusTime
-                const currentProgress = Number(
-                    (progress + 1 / currentInterval).toFixed(2)
-                )
+                setSeconds(seconds + 1)
+                const currentInterval = timesState.focusTime * 60
+                const currentProgress = (seconds * 10) / currentInterval
+                console.log(currentProgress)
                 if (currentProgress < 100) {
                     setProgress(currentProgress)
                 } else {
                     setIsWorkingState(false)
                     setProgress(0)
+                    setSeconds(1)
                 }
             } else {
-                const currentInterval = timesState.breakTime
-                const currentProgress = Number(
-                    (progress + 1 / currentInterval).toFixed(2)
-                )
+                setSeconds(seconds + 1)
+                const currentInterval = timesState.breakTime * 60
+                const currentProgress = (seconds * 10) / currentInterval
                 if (currentProgress < 100) {
                     setProgress(currentProgress)
                 } else {
                     setIsWorkingState(true)
                     setProgress(0)
+                    setSeconds(1)
                 }
             }
         }, 1000)

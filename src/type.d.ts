@@ -4,8 +4,11 @@ interface ITimes {
     longerBreakTime: number
 }
 
-type TimesState = {
+type AppState = {
     times: ITimes
+    isRunning: boolean
+    intervalsCount: number
+    progress: number
 }
 
 type TimesAction = {

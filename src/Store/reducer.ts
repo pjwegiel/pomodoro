@@ -12,7 +12,6 @@ const initialState: TimesState = {
 function reducer(state: TimesState = initialState, action: TimesAction) {
     switch (action.type) {
         case actionTypes.SET_TIMES:
-            console.log('essa')
             return {
                 times: {
                     focusTime: action.times.focusTime,

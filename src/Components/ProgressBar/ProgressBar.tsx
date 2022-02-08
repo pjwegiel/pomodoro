@@ -8,7 +8,6 @@ export function ProgressBar(): JSX.Element {
     const timesState = useSelector((state: TimesState) => state.times)
     const [progress, setProgress] = useState<number>(0)
     useEffect(() => {
-        // setIsWorkingState(isWorking)
         const interval = setInterval(() => {
             if (isWorkingState) {
                 const currentInterval = timesState.focusTime
@@ -21,7 +20,6 @@ export function ProgressBar(): JSX.Element {
                     setIsWorkingState(false)
                     setProgress(0)
                 }
-                console.log(currentProgress)
             } else {
                 const currentInterval = timesState.breakTime
                 const currentProgress = Number(
@@ -33,7 +31,6 @@ export function ProgressBar(): JSX.Element {
                     setIsWorkingState(true)
                     setProgress(0)
                 }
-                console.log(currentProgress)
             }
         }, 1000)
         return () => clearInterval(interval)

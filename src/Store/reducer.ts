@@ -6,7 +6,7 @@ const initialState: AppState = {
         breakTime: 5,
         longerBreakTime: 15,
     },
-    isRunning: true,
+    isRunning: false,
     intervalsCount: 0,
 }
 

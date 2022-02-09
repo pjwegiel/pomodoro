@@ -38,7 +38,7 @@ export function ProgressBar(): JSX.Element {
             }
         }, 1000)
         return () => clearInterval(interval)
-    }, [isWorkingState, timesState, progress])
+    }, [isWorkingState, timesState, progress, isRunningState])
     return (
         <>
             <Typography variant="h1">

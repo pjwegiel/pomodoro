@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals'
 import App from './App'
 import reducer from './Store/reducer'
 
-const store: Store<AppState, TimesAction> & {
+const store: Store<AppState, TimesAction | IsRunningAction> & {
     dispatch: DispatchType
 } = createStore(reducer, applyMiddleware(thunk))
 

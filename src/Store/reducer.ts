@@ -8,11 +8,13 @@ const initialState: AppState = {
     },
     isRunning: true,
     intervalsCount: 0,
-    progress: 0,
 }
 
-// eslint-disable-next-line default-param-last
-function reducer(state: AppState = initialState, action: TimesAction) {
+function reducer(
+    // eslint-disable-next-line default-param-last
+    state: AppState = initialState,
+    action: TimesAction & IsRunningAction
+) {
     switch (action.type) {
         case actionTypes.SET_TIMES:
             return {
@@ -22,6 +24,7 @@ function reducer(state: AppState = initialState, action: TimesAction) {
                     breakTime: action.times.breakTime,
                     longerBreakTime: action.times.longerBreakTime,
                 },
+                isRunning: false,
             }
         case actionTypes.SET_ISRUNNING:
             return {

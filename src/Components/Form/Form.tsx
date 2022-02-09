@@ -50,11 +50,15 @@ export function Form(): JSX.Element {
                 />
             </Container>
             <ActionButton
-                label="start"
+                label="set times"
+                color="success"
                 onClickEvent={() => {
-                    dispatch(
-                        setTimes({ focusTime, breakTime, longerBreakTime })
-                    )
+                    const times: ITimes = {
+                        focusTime,
+                        breakTime,
+                        longerBreakTime,
+                    }
+                    dispatch(setTimes(times))
                 }}
             />
         </>

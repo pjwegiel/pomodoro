@@ -7,31 +7,33 @@ export function ProgressBar(): JSX.Element {
     const [isWorkingState, setIsWorkingState] = useState(true)
     const [seconds, setSeconds] = useState(1)
     const timesState = useSelector((state: AppState) => state.times)
+    const isRunningState = useSelector((state: AppState) => state.isRunning)
     const [progress, setProgress] = useState<number>(0)
     useEffect(() => {
         const interval = setInterval(() => {
-            if (isWorkingState) {
-                setSeconds(seconds + 1)
-                const currentInterval = timesState.focusTime * 60
-                const currentProgress = (seconds * 10) / currentInterval
-                console.log(currentProgress)
-                if (currentProgress < 100) {
-                    setProgress(currentProgress)
+            if (isRunningState) {
+                if (isWorkingState) {
+                    setSeconds(seconds + 1)
+                    const currentInterval = timesState.focusTime * 60
+                    const currentProgress = (seconds * 10) / currentInterval
+                    if (currentProgress < 100) {
+                        setProgress(currentProgress)
+                    } else {
+                        setIsWorkingState(false)
+                        setProgress(0)
+                        setSeconds(1)
+                    }
                 } else {
-                    setIsWorkingState(false)
-                    setProgress(0)
-                    setSeconds(1)
-                }
-            } else {
-                setSeconds(seconds + 1)
-                const currentInterval = timesState.breakTime * 60
-                const currentProgress = (seconds * 10) / currentInterval
-                if (currentProgress < 100) {
-                    setProgress(currentProgress)
-                } else {
-                    setIsWorkingState(true)
-                    setProgress(0)
-                    setSeconds(1)
+                    setSeconds(seconds + 1)
+                    const currentInterval = timesState.breakTime * 60
+                    const currentProgress = (seconds * 10) / currentInterval
+                    if (currentProgress < 100) {
+                        setProgress(currentProgress)
+                    } else {
+                        setIsWorkingState(true)
+                        setProgress(0)
+                        setSeconds(1)
+                    }
                 }
             }
         }, 1000)

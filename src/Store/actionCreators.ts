@@ -7,3 +7,11 @@ export function setTimes(times: ITimes) {
     }
     return action
 }
+
+export function setIsRunning(isRunning: boolean) {
+    const action: IsRunningAction = {
+        type: actionTypes.SET_ISRUNNING,
+        isRunning,
+    }
+    return action
+}

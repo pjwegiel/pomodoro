@@ -1,4 +1,4 @@
-import Button from '@mui/material/Button'
+import Button, { ButtonProps } from '@mui/material/Button'
 
 type ActionButtonProps = {
     label: string
@@ -6,15 +6,16 @@ type ActionButtonProps = {
 }
 
 export function ActionButton({
+    color,
     label,
     onClickEvent,
-}: ActionButtonProps): JSX.Element {
+}: ButtonProps & ActionButtonProps): JSX.Element {
     return (
         <Button
             variant="contained"
+            color={color}
             fullWidth
-            onClick={(e) => {
-                e.preventDefault()
+            onClick={() => {
                 onClickEvent()
             }}
         >

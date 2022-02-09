@@ -8,12 +8,16 @@ type AppState = {
     times: ITimes
     isRunning: boolean
     intervalsCount: number
-    progress: number
 }
 
 type TimesAction = {
-    type: string
+    type: actionTypes.SET_TIMES
     times: ITimes
+}
+
+type IsRunningAction = {
+    type: actionTypes.SET_ISRUNING
+    isRunning: boolean
 }
 
 type DispatchType = (args: TimesAction) => TimesAction

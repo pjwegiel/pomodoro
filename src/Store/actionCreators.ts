@@ -8,10 +8,16 @@ export function setTimes(times: ITimes) {
     return action
 }
 
-export function setIsRunning(isRunning: boolean) {
-    const action: IsRunningAction = {
+export function setIsRunning() {
+    const action = {
         type: actionTypes.SET_ISRUNNING,
-        isRunning,
+    }
+    return action
+}
+
+export function incrementIntervals() {
+    const action = {
+        type: actionTypes.INCREMENT_INTERVALS,
     }
     return action
 }

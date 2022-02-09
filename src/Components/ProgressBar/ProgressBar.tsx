@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react'
 
 import { LinearProgress, Typography, Box } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { incrementIntervals } from '../../Store/actionCreators'
 
 export function ProgressBar(): JSX.Element {
     const [isWorkingState, setIsWorkingState] = useState(true)
     const [seconds, setSeconds] = useState(1)
     const timesState = useSelector((state: AppState) => state.times)
     const isRunningState = useSelector((state: AppState) => state.isRunning)
+    const intervalsCountState = useSelector(
+        (state: AppState) => state.intervalsCount
+    )
+    const dispatch = useDispatch()
     const [progress, setProgress] = useState<number>(0)
     useEffect(() => {
         const interval = setInterval(() => {
@@ -22,10 +27,14 @@ export function ProgressBar(): JSX.Element {
                         setIsWorkingState(false)
                         setProgress(0)
                         setSeconds(1)
+                        dispatch(incrementIntervals())
                     }
                 } else {
                     setSeconds(seconds + 1)
-                    const currentInterval = timesState.breakTime * 60
+                    const currentInterval =
+                        intervalsCountState % 4 === 0
+                            ? timesState.breakTime * 60
+                            : timesState.longerBreakTime * 60
                     const currentProgress = (seconds * 10) / currentInterval
                     if (currentProgress < 100) {
                         setProgress(currentProgress)
@@ -38,7 +47,13 @@ export function ProgressBar(): JSX.Element {
             }
         }, 1000)
         return () => clearInterval(interval)
-    }, [isWorkingState, timesState, progress, isRunningState])
+    }, [
+        isWorkingState,
+        timesState,
+        progress,
+        isRunningState,
+        intervalsCountState,
+    ])
     return (
         <>
             <Typography variant="h1">

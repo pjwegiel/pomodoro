@@ -35,7 +35,7 @@ function App() {
                 label={isRunning ? 'stop' : 'start'}
                 color={isRunning ? 'error' : 'success'}
                 onClickEvent={() => {
-                    dispatch(setIsRunning(isRunning))
+                    dispatch(setIsRunning())
                 }}
             />
         </Container>

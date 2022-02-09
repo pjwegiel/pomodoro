@@ -13,7 +13,7 @@ const initialState: AppState = {
 function reducer(
     // eslint-disable-next-line default-param-last
     state: AppState = initialState,
-    action: TimesAction & IsRunningAction
+    action: TimesAction & IsRunningAction & IntervalsAction
 ) {
     switch (action.type) {
         case actionTypes.SET_TIMES:
@@ -30,6 +30,11 @@ function reducer(
             return {
                 ...state,
                 isRunning: !state.isRunning,
+            }
+        case actionTypes.INCREMENT_INTERVALS:
+            return {
+                ...state,
+                intervalsCount: state.intervalsCount + 1,
             }
         default:
             return state

@@ -20,4 +20,9 @@ type IsRunningAction = {
     isRunning: boolean
 }
 
+type IntervalsAction = {
+    type: string
+    intervalsCount: number
+}
+
 type DispatchType = (args: TimesAction) => TimesAction

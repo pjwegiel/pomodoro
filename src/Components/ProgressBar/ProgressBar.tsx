@@ -6,20 +6,23 @@ import { incrementIntervals } from '../../Store/actionCreators'
 
 export function ProgressBar(): JSX.Element {
     const [isWorkingState, setIsWorkingState] = useState(true)
-    const [seconds, setSeconds] = useState(1)
-    const timesState = useSelector((state: AppState) => state.times)
-    const isRunningState = useSelector((state: AppState) => state.isRunning)
-    const intervalsCountState = useSelector(
-        (state: AppState) => state.intervalsCount
-    )
-    const dispatch = useDispatch()
     const [progress, setProgress] = useState<number>(0)
+    const [seconds, setSeconds] = useState(1)
+    const progressBarState = useSelector((state: AppState) => {
+        return {
+            times: state.times,
+            isRunning: state.isRunning,
+            intervalsCount: state.intervalsCount,
+        }
+    })
+    const dispatch = useDispatch()
     useEffect(() => {
         const interval = setInterval(() => {
-            if (isRunningState) {
+            if (progressBarState.isRunning) {
                 if (isWorkingState) {
                     setSeconds(seconds + 1)
-                    const currentInterval = timesState.focusTime * 60
+                    const currentInterval =
+                        progressBarState.times.focusTime * 60
                     const currentProgress = (seconds * 10) / currentInterval
                     if (currentProgress < 100) {
                         setProgress(currentProgress)
@@ -32,9 +35,9 @@ export function ProgressBar(): JSX.Element {
                 } else {
                     setSeconds(seconds + 1)
                     const currentInterval =
-                        intervalsCountState % 4 === 0
-                            ? timesState.breakTime * 60
-                            : timesState.longerBreakTime * 60
+                        progressBarState.intervalsCount % 4 === 0
+                            ? progressBarState.times.breakTime * 60
+                            : progressBarState.times.longerBreakTime * 60
                     const currentProgress = (seconds * 10) / currentInterval
                     if (currentProgress < 100) {
                         setProgress(currentProgress)
@@ -47,13 +50,7 @@ export function ProgressBar(): JSX.Element {
             }
         }, 1000)
         return () => clearInterval(interval)
-    }, [
-        isWorkingState,
-        timesState,
-        progress,
-        isRunningState,
-        intervalsCountState,
-    ])
+    }, [progressBarState, progress])
     return (
         <>
             <Typography variant="h1">

@@ -1,8 +1,7 @@
 import { makeStyles } from '@mui/styles'
-import { Container, TextField } from '@mui/material'
+import { Button, Container, TextField } from '@mui/material'
 import { ChangeEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { ActionButton } from '../ActionButton/ActionButton'
 import { setTimes } from '../../Store/actionCreators'
 
 const useStyles = makeStyles({
@@ -49,10 +48,11 @@ export function Form(): JSX.Element {
                     onChange={handleChange(setLongerBreakTime)}
                 />
             </Container>
-            <ActionButton
-                label="set times"
+            <Button
                 color="success"
-                onClickEvent={() => {
+                fullWidth
+                variant="contained"
+                onClick={() => {
                     const times: ITimes = {
                         focusTime,
                         breakTime,
@@ -60,7 +60,9 @@ export function Form(): JSX.Element {
                     }
                     dispatch(setTimes(times))
                 }}
-            />
+            >
+                set times
+            </Button>
         </>
     )
 }

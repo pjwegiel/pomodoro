@@ -1,6 +1,8 @@
 import { makeStyles } from '@mui/styles'
-import { Container, Button, TextField } from '@mui/material'
+import { Button, Container, TextField } from '@mui/material'
 import { ChangeEvent, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setTimes } from '../../Store/actionCreators'
 
 const useStyles = makeStyles({
     textFieldsContainer: {
@@ -13,6 +15,7 @@ export function Form(): JSX.Element {
     const [breakTime, setBreakTime] = useState(5)
     const [longerBreakTime, setLongerBreakTime] = useState(15)
     const classes = useStyles()
+    const dispatch = useDispatch()
     const handleChange =
         (cb: (number: number) => void) =>
         (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -45,8 +48,20 @@ export function Form(): JSX.Element {
                     onChange={handleChange(setLongerBreakTime)}
                 />
             </Container>
-            <Button variant="contained" fullWidth>
-                Start
+            <Button
+                color="success"
+                fullWidth
+                variant="contained"
+                onClick={() => {
+                    const times: ITimes = {
+                        focusTime,
+                        breakTime,
+                        longerBreakTime,
+                    }
+                    dispatch(setTimes(times))
+                }}
+            >
+                set times
             </Button>
         </>
     )

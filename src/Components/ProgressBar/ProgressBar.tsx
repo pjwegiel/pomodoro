@@ -8,6 +8,8 @@ export function ProgressBar(): JSX.Element {
     const [isWorkingState, setIsWorkingState] = useState(true)
     const [progress, setProgress] = useState<number>(0)
     const [seconds, setSeconds] = useState(1)
+    const [timerSeconds, setTimerSeconds] = useState(0)
+    const [timerMinutes, setTimerMinutes] = useState(0)
     const progressBarState = useSelector((state: AppState) => {
         return {
             times: state.times,
@@ -20,6 +22,13 @@ export function ProgressBar(): JSX.Element {
         const interval = setInterval(() => {
             if (progressBarState.isRunning) {
                 if (isWorkingState) {
+                    console.log(timerSeconds)
+                    if (timerSeconds === 59) {
+                        console.log('essa')
+                        setTimerSeconds(timerSeconds - 60)
+                        setTimerMinutes(timerMinutes + 1)
+                    }
+                    setTimerSeconds(timerSeconds + 1)
                     setSeconds(seconds + 1)
                     const currentInterval =
                         progressBarState.times.focusTime * 60
@@ -50,7 +59,7 @@ export function ProgressBar(): JSX.Element {
             }
         }, 1000)
         return () => clearInterval(interval)
-    }, [progressBarState, progress])
+    }, [progressBarState, progress, timerSeconds, timerMinutes])
     return (
         <>
             <Typography variant="h1">
@@ -62,7 +71,7 @@ export function ProgressBar(): JSX.Element {
                     value={progress}
                     color={isWorkingState ? 'primary' : 'inherit'}
                 />
-                <Typography variant="h4">essa</Typography>
+                <Typography variant="h4">{`${timerMinutes}:${timerSeconds}`}</Typography>
             </Box>
         </>
     )
